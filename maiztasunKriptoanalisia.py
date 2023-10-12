@@ -1,13 +1,9 @@
+
 # Mezua deskriptatzen gai den programa sortu: jatorrizko mezu gaztelerakoa izanik
 import string
 
 #freq_sp = {"e":16.78, "a":11.96, "o":8.69, "l":8.37, "s":7.88, "n":7.01, "d":6.87, "r":4.94, "u":4.80, "i":4.15, "t":3.31, "c":2.92, "p":2.776, "m":2.12, "y":1.54, "q":1.53, "b":0.92, "h":0.89, "g":0.73, "f":0.52, "v":0.39, "j":0.30, "ñ":0.29, "z":0.15, "x":0.06, "k":0.00, "w":0.00}
-"""
-def aldatu(ema):
-    karak1= input("Zein da aldatu nahi duzun karakterea?")
-    karak2= input("Zein da jarri nahi duzun karakterea?")
-    return ema.replace(karak1,karak2)
-"""
+
 
 def main():
     textua="RIJ AZKKZHC PIKCE XT ACKCUXJHX SZX, E NZ PEJXKE, PXGIK XFDKXNEQE RIPI RIPQEHCK ET OENRCNPI AXNAX ZJ RKCHXKCI AX CJAXDXJAXJRCE " \
@@ -21,23 +17,44 @@ def main():
            "HKCZJOI OKEJSZCNHE."
 
     karakt=list(string.ascii_uppercase) #MAIUSKULAZKO KARAKT GUZTIAK
-    print(karakt)
     zenbaketa= {}
+    ema=textua
+    ordezkapenak=list(string.ascii_lowercase) #MINUISKULAZKO KARAKT GUZTIAK 
 
     for i in range(len(karakt)): #karaktere bakoitza zenbat aldiz dagoen zenbatu
-        print(i)
-        print(karakt[i])
-        print(textua.count(karakt[i]))
         if (textua.count(karakt[i])!=0):
             zenbaketa[karakt[i]] = textua.count(karakt[i])
-    print (zenbaketa)
 
     zenbaketa_sort=dict(sorted(zenbaketa.items(), key=lambda item:item[1], reverse=True))   #karaktere kop arabera ordenatuta
-    print(zenbaketa_sort)
     letrak_ord=list(zenbaketa_sort.keys())  #soilik karaktearekin gelditu, kop ez dugu behar
-    print("ORDEZKAPEN FALTA:")
-    print(len(letrak_ord))
+    print ("Aldatzeko falta diren karaktereak:"+str(list(letrak_ord))) 
 
+    #Suposaketak
+    while len(letrak_ord)!=0:
+        print("---------------")
+        print(ema)
+        karak1 = input("Zein da aldatu nahi duzun karakterea?")
+        karak2 = input("Zein da jarri nahi duzun karakterea?")
+        if karak1 in letrak_ord and karak2 in ordezkapenak:
+            print("--------------------")
+            ema= ema.replace(karak1, karak2)
+            ordezkapenak.remove(karak2)
+            letrak_ord.remove(karak1)
+            print("ORDEZKAPEN FALTA:")
+            print(len(letrak_ord))
+            print("Aldatzeko falta diren karaktereak:")
+            print(list(letrak_ord))
+            print("Ordezkatzeko falta diren karaktereak:")
+            print(list(ordezkapenak))
+        else:
+            print("-----------------")
+            print("Berriro saiatu")
+
+    if len(letrak_ord)==0:
+        print("Mezua deszifratuta dago")
+        print("Mezu zuzena: "+ema)
+
+"""
    # Textuan gehien erabiltzen diren karaktereak, gazteleran gehien erabiltzen diren 2 karakteengandik (e eta a) ordezkatu
     ordezkapenak=list(string.ascii_lowercase)
     gehienOrd=['e','a']
@@ -70,29 +87,6 @@ def main():
     print(ema)
 
     """
-    # oraindik aldatu ez direnetik, gehien errepikatzen dena freeq 3. karakt (o)-rekin aldatzen da
-    i=2
-    if (letrak_ord[i]=='T'):
-        i=3
-    ema=ema.replace(letrak_ord[i],'o')
-    """
-
-    #Suposaketak
-    while len(letrak_ord)!=0:
-        print(ema)
-        karak1 = input("Zein da aldatu nahi duzun karakterea?")
-        karak2 = input("Zein da jarri nahi duzun karakterea?")
-        if karak1 in letrak_ord and karak2 in ordezkapenak:
-            ema= ema.replace(karak1, karak2)
-            ordezkapenak.remove(karak2)
-            letrak_ord.remove(karak1)
-            print("ORDEZKAPEN FALTA:")
-            print(len(letrak_ord))
-            print("Aldatzeko falta diren karaktereak:")
-            print(list(letrak_ord))
-
-    if len(letrak_ord)==0:
-        print("Mezua deszifratuta dago")
 
     #'A'--> 'd' ,  'N'-->'s',  'J'-->'n','Z'-->'u'
     #Rlase suposatuko dugu: 'R'--> 'c'
