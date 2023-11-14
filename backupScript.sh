@@ -1,6 +1,6 @@
 #!/bin/bash
 # Definir el origen y el destino de la copia. Cambiar por tu nombre de usuario
-origen=/home/mb/Descargas/SEGUR/bigarren/Segurtasuna
+origen=/home/mb/Descargas/SEGUR/bigarren/Segurtasuna/
 destino=/var/tmp/Backup
 
 # Obtener la fecha actual en formato YYYY-MM-DD
