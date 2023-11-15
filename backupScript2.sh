@@ -9,6 +9,8 @@ LATEST_LINK=$BACKUP_DIR/$(date -d yesterday +%F) # La ruta de la carpeta de refe
 
 # Crear el directorio de destino si no existe
 ssh mb@35.246.21.16 mkdir -p $BACKUP_PATH
+ssh mb@35.246.21.16 mkdir -p $LATEST_LINK
+
 
 # Ejecutar el comando rsync con las opciones adecuadas
 rsync -av -e ssh --link-dest=$LATEST_LINK $SOURCE_DIR mb@35.246.21.16:$BACKUP_PATH
